@@ -44,7 +44,7 @@ struct myCompPrice {
 static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer>> &times, int cash);
 static void model2(priority_queue<Customer, vector<Customer>,myCompTime<Customer>> &times, int cash);
 int main() {
-    ifstream infile("C:\\Users\\abc\\Desktop\\Test Cases Project2\\large-input.txt");
+    ifstream infile("C:\\Users\\abc\\Desktop\\Test Cases Project2\\mid-input-1.txt");
     string line;
     getline(infile, line);
     const int cash = stoi(line);
@@ -149,7 +149,7 @@ static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer
         }
     }
     ofstream myfile;
-    myfile.open("C:\\Users\\abc\\Desktop\\Test Cases Project2\\Burak-large-output.txt", ios::trunc);
+    myfile.open("C:\\Users\\abc\\Desktop\\Test Cases Project2\\Burak-mid-output-1.txt", ios::trunc);
     myfile<<fixed<<setprecision(2)<<t<<endl;
     myfile<<maxLC<<endl;
     myfile<<maxLB<<endl;
@@ -165,20 +165,7 @@ static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer
     }
     myfile<<endl;
     myfile.close();
-    /*
-    cout<<fixed<<setprecision(2)<<t<<endl;
-    cout<<maxLC<<endl;
-    cout<<maxLB<<endl;
-    for(int i=0;i<cash;i++){
-        cout<<utilization(cashArr[i],t)<<endl;
-    }
-    for(int i=0;i<cash/3;i++){
-        cout<<utilization(barArr[i],t)<<endl;
-    }
-    while(!last.empty()){
-        cout<<(last.top()).t-(last.top().arrTime)<<endl;
-        last.pop();
-    }*/
+
 }
 static void model2(priority_queue<Customer, vector<Customer>,myCompTime<Customer>> &times, int cash){
     Cashier cashArr[cash];
@@ -211,7 +198,6 @@ static void model2(priority_queue<Customer, vector<Customer>,myCompTime<Customer
                 }
             }
             if(!anyAvailable){
-               // cout<<"noavailablecash"<<endl;
                 cashQ.push(c);
                 if(cashQ.size()>maxLC)
                     maxLC=cashQ.size();
@@ -259,37 +245,21 @@ static void model2(priority_queue<Customer, vector<Customer>,myCompTime<Customer
         }
     }
     ofstream myfile;
-    myfile.open("C:\\Users\\abc\\Desktop\\Test Cases Project2\\Burak-large-output.txt", ios::app);
+    myfile.open("C:\\Users\\abc\\Desktop\\Test Cases Project2\\Burak-mid-output-1.txt", ios::app);
     myfile<<fixed<<setprecision(2)<<t<<endl;
-    myfile<<maxLC<<endl;
+    myfile<<maxLC;
     for(int i=0;i<cash/3;i++) {
-        myfile << maxLB[i] << endl;
+        myfile << endl << maxLB[i];
     }
     for(int i=0;i<cash;i++){
-        myfile<<utilization(cashArr[i],t)<<endl;
+        myfile<<endl<<utilization(cashArr[i],t);
     }
     for(int i=0;i<cash/3;i++){
-        myfile<<utilization(barArr[i],t)<<endl;
+        myfile<<endl<<utilization(barArr[i],t);
     }
     while(!last.empty()){
-        myfile<<(last.top()).t-(last.top().arrTime)<<endl;
+        myfile<<endl<<(last.top()).t-(last.top().arrTime);
         last.pop();
     }
     myfile.close();
-    /*
-    cout<<fixed<<setprecision(2)<<t<<endl;
-    cout<<maxLC<<endl;
-    for(int i=0;i<cash/3;i++) {
-        cout << maxLB[i] << endl;
-    }
-    for(int i=0;i<cash;i++){
-        cout<<utilization(cashArr[i],t)<<endl;
-    }
-    for(int i=0;i<cash/3;i++){
-        cout<<utilization(barArr[i],t)<<endl;
-    }
-    while(!last.empty()){
-        cout<<(last.top()).t-(last.top().arrTime)<<endl;
-        last.pop();
-    }*/
 }
