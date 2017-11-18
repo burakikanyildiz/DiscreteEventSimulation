@@ -41,34 +41,35 @@ struct myCompPrice {
         return first.price < second.price;
     }
 };
-static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer>> &times, int cash);
-static void model2(priority_queue<Customer, vector<Customer>,myCompTime<Customer>> &times, int cash);
-int main() {
-    ifstream infile("C:\\Users\\abc\\Desktop\\Test Cases Project2\\mid-input-1.txt");
+static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer>> &times, int cash,char* argv[]);
+static void model2(priority_queue<Customer, vector<Customer>,myCompTime<Customer>> &times, int cash,char* argv[]);
+int main(int argc, char* argv[]) {
+    if(argc!=3){
+        cout<<"Run the code with following command: ./projext1 [input_file] [output_file]"<<endl;
+        return 1;
+    }
+    ifstream infile(argv[1]);
     string line;
     getline(infile, line);
     const int cash = stoi(line);
-    //cout << "number of cashiers: " << cash << endl;
 
     getline(infile, line);
     const int cus = stoi(line);
-    //cout << "number of customers: " << cus << endl;
     priority_queue<Customer, vector<Customer>,myCompTime<Customer>> times;
     priority_queue<Customer, vector<Customer>,myCompTime<Customer>> times2;
     for (int i = 0; i < cus; i++) {
         getline(infile, line);
-      //  cout << "line: " << line << endl;
         vector<string> words;
         split1(line, words);
         times.push(Customer(stod(words[0]), stod(words[1]), stod(words[2]), stod(words[3]),i));
         times2.push(Customer(stod(words[0]), stod(words[1]), stod(words[2]), stod(words[3]),i));
     }
-      model1(times,cash);
+      model1(times,cash,argv);
       cout<<endl;
-      model2(times2,cash);
+      model2(times2,cash,argv);
     return 0;
 }
-static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer>> &times,int cash){
+static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer>> &times,int cash,char* argv[]){
     Cashier cashArr[cash];
     Barista barArr[cash / 3];
     queue<Customer> cashQ;
@@ -96,7 +97,6 @@ static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer
                 }
             }
             if(!anyAvailable){
-             //   cout<<"noavailablecash"<<endl;
                 cashQ.push(c);
                 if(cashQ.size()>maxLC)
                     maxLC=cashQ.size();
@@ -149,7 +149,7 @@ static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer
         }
     }
     ofstream myfile;
-    myfile.open("C:\\Users\\abc\\Desktop\\Test Cases Project2\\Burak-mid-output-1.txt", ios::trunc);
+    myfile.open(argv[2],ios::trunc);
     myfile<<fixed<<setprecision(2)<<t<<endl;
     myfile<<maxLC<<endl;
     myfile<<maxLB<<endl;
@@ -167,7 +167,7 @@ static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer
     myfile.close();
 
 }
-static void model2(priority_queue<Customer, vector<Customer>,myCompTime<Customer>> &times, int cash){
+static void model2(priority_queue<Customer, vector<Customer>,myCompTime<Customer>> &times, int cash,char* argv[]){
     Cashier cashArr[cash];
     Barista barArr[cash / 3];
     queue<Customer> cashQ;
@@ -245,7 +245,7 @@ static void model2(priority_queue<Customer, vector<Customer>,myCompTime<Customer
         }
     }
     ofstream myfile;
-    myfile.open("C:\\Users\\abc\\Desktop\\Test Cases Project2\\Burak-mid-output-1.txt", ios::app);
+    myfile.open(argv[2], ios::app);
     myfile<<fixed<<setprecision(2)<<t<<endl;
     myfile<<maxLC;
     for(int i=0;i<cash/3;i++) {

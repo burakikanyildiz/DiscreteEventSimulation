@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.8)
-project(project2_burak_yildiz_2015400069)
+cmake_minimum_required(VERSION 2.8.12.2)
+project(project2)
 
 set(CMAKE_CXX_STANDARD 11)
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(SOURCE_FILES main.cpp Customer.cpp Customer.h Barista.cpp Barista.h Cashier.cpp Cashier.h Employee.cpp Employee.h)
-add_executable(project2_burak_yildiz_2015400069 ${SOURCE_FILES})
+add_executable(project2 ${SOURCE_FILES})
