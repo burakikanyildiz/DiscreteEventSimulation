@@ -11,7 +11,6 @@
 class Cashier: public Employee {
 public:
     Cashier();
-    int getArea() override;
 };
 
 

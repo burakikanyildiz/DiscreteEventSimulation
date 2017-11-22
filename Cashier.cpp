@@ -6,6 +6,3 @@
 Cashier::Cashier(){
     Employee();
 }
-int Cashier:: getArea(){
-    return 50;
-}

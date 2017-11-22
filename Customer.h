@@ -13,10 +13,10 @@ public:
     double orderTime;
     double brewTime;
     double price;
-    int action=1;
-    double t;
-    int e=0;
-    int rank=0;
+    int action=1; // in which phase of ordering customer currently is
+    double t;     // critical times of customer
+    int e=0;      //order of employee customer currently dealing with
+    int rank=0;   //order of customer's arrival
     Customer();
     Customer(double arrTime,double orderTime,double brewTime, double price,int rank);
     bool operator <(const Customer& other) const;

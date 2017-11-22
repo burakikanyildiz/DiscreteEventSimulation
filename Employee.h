@@ -11,11 +11,9 @@ class Customer;
 class Employee {
 public:
     double totalWork= 0.00;
-    Customer *c=nullptr;
+    Customer *c=nullptr; //pointer to the customer employee is taking care of
 
-    virtual int getArea();
     Employee();
-    ~Employee();
 };
 
 

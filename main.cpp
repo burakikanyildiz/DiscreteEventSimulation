@@ -6,15 +6,12 @@
 #include <fstream>
 #include "Customer.h"
 #include <algorithm>
-#include <vector>
-#include <functional>
 #include <iterator>
 #include <sstream>
 #include <iomanip>
 
 using namespace std;
 double utilization(Employee &e,double t){
-   // cout<<e.totalWork<<" "<<t<<endl;
     return e.totalWork/t;
 }
 template<class Container>
@@ -23,19 +20,19 @@ void split1(const string& str, Container& cont){
     copy(istream_iterator<string>(iss),
          istream_iterator<string>(),back_inserter(cont));
 }
-template<typename type>
+template<typename type>//ordering Customers acc to their arrival order
 struct myCompRank {
     bool operator()(const type & first, const type & second) const  {
         return first.rank > second.rank;
     }
 };
-template<typename type>
+template<typename type>//ordering Customers according to their critical times
 struct myCompTime {
     bool operator()(const type & first, const type & second) const  {
         return first.t > second.t;
     }
 };
-template<typename type>
+template<typename type>//ordering Customers according to their orders' price
 struct myCompPrice {
     bool operator()(const type & first, const type & second) const  {
         return first.price < second.price;
@@ -73,18 +70,18 @@ static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer
     Cashier cashArr[cash];
     Barista barArr[cash / 3];
     queue<Customer> cashQ;
-    priority_queue<Customer, vector<Customer>, myCompPrice<Customer> > barQ;
+    priority_queue<Customer, vector<Customer>, myCompPrice<Customer> > barQ;//Barista priority queue according to price of order
     priority_queue<Customer, vector<Customer>,myCompRank<Customer>> last;
-    int maxLC = 0;
-    int maxLB=0;
-    double t=0;
+    int maxLC = 0;//Holds maximum length of Cashier queue
+    int maxLB=0;//Holds maximum length of Barista queue
+    double t=0;//total work time
     while(!times.empty()){
         Customer c=times.top();
         times.pop();
         t=c.t;
         if(c.action==1){
-            bool anyAvailable=false;
-            for (int i = 0; i < cash; i++) {
+            bool anyAvailable=false;//holds for is there any avaliable cashier
+            for (int i = 0; i < cash; i++) {//iterating till find a free cashier
                 if (cashArr[i].c== nullptr) {
                     cashArr[i].c=&c;
                     cashArr[i].totalWork+=c.orderTime;
@@ -96,7 +93,7 @@ static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer
                     break;
                 }
             }
-            if(!anyAvailable){
+            if(!anyAvailable){//not found available cashier, then push the customer to the queue
                 cashQ.push(c);
                 if(cashQ.size()>maxLC)
                     maxLC=cashQ.size();
@@ -104,7 +101,7 @@ static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer
         }
         else if(c.action==2){
             cashArr[c.e].c=nullptr;
-            if(!cashQ.empty()){
+            if(!cashQ.empty()){//cashierQ is not empty, then move the first customer to newly freed cashier.
                 Customer a=cashQ.front();
                 cashQ.pop();
                 cashArr[c.e].c=&a;
@@ -115,7 +112,7 @@ static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer
                 times.push(a);
             }
             bool anyAvailable=false;
-            for(int i=0;i<cash/3;i++){
+            for(int i=0;i<cash/3;i++){//iterating till find a free barista
                 if(barArr[i].c== nullptr){
                     barArr[i].c=&c;
                     barArr[i].totalWork+=c.brewTime;
@@ -136,7 +133,7 @@ static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer
         else if(c.action==3){
             barArr[c.e].c=nullptr;
             last.push(c);
-            if(!barQ.empty()){
+            if(!barQ.empty()){//BaristaQ not empty, then move the Customer to the newly freed Barista
                 Customer a=barQ.top();
                 barQ.pop();
                 barArr[c.e].c=&a;
@@ -159,7 +156,7 @@ static void model1(priority_queue<Customer, vector<Customer>,myCompTime<Customer
     for(int i=0;i<cash/3;i++){
         myfile<<utilization(barArr[i],t)<<endl;
     }
-    while(!last.empty()){
+    while(!last.empty()){//prints customer's total time of order
         myfile<<(last.top()).t-(last.top().arrTime)<<endl;
         last.pop();
     }

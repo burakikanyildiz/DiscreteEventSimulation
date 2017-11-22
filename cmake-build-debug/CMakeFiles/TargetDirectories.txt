@@ -1,3 +1,0 @@
-C:/Users/abc/CLionProjects/project2-burak-yildiz-2015400069/cmake-build-debug/CMakeFiles/project2_burak_yildiz_2015400069.dir
-C:/Users/abc/CLionProjects/project2-burak-yildiz-2015400069/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/abc/CLionProjects/project2-burak-yildiz-2015400069/cmake-build-debug/CMakeFiles/rebuild_cache.dir

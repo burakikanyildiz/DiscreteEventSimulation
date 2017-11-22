@@ -6,31 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/student/Desktop/project2-burak-yildiz-2015400069/Barista.cpp
-Barista.h
-/home/student/Desktop/project2-burak-yildiz-2015400069/Barista.h
-
 /home/student/Desktop/project2-burak-yildiz-2015400069/Barista.h
 Employee.h
 /home/student/Desktop/project2-burak-yildiz-2015400069/Employee.h
-
-/home/student/Desktop/project2-burak-yildiz-2015400069/Cashier.cpp
-Cashier.h
-/home/student/Desktop/project2-burak-yildiz-2015400069/Cashier.h
 
 /home/student/Desktop/project2-burak-yildiz-2015400069/Cashier.h
 Employee.h
 /home/student/Desktop/project2-burak-yildiz-2015400069/Employee.h
 
-/home/student/Desktop/project2-burak-yildiz-2015400069/Customer.cpp
-Customer.h
 /home/student/Desktop/project2-burak-yildiz-2015400069/Customer.h
-
-/home/student/Desktop/project2-burak-yildiz-2015400069/Customer.h
-Employee.h
-/home/student/Desktop/project2-burak-yildiz-2015400069/Employee.h
-
-/home/student/Desktop/project2-burak-yildiz-2015400069/Employee.cpp
 Employee.h
 /home/student/Desktop/project2-burak-yildiz-2015400069/Employee.h
 
@@ -54,10 +38,6 @@ fstream
 Customer.h
 /home/student/Desktop/project2-burak-yildiz-2015400069/Customer.h
 algorithm
--
-vector
--
-functional
 -
 iterator
 -
